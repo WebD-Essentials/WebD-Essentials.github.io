@@ -6,10 +6,133 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>WebD Essentials</title>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+            .icon {
+                width: 20px;
+            }
+
+            * {
+                font-family: 'Poppins', sans-serif;
+            }
+
+            .desc {
+                font-size: 12px;
+                width: 300px;
+            }
+
+            table {
+                border-collapse: collapse;
+                width: 100%;
+            }
+
+            th,
+            td {
+                text-align: left;
+                padding: 8px;
+            }
+
+            tr:nth-child(even) {
+                background-color: #f2f2f2;
+            }
+
+            th {
+                background-color: #6495ED;
+                color: white;
+            }
+
+            @media screen and (max-width: 600px) {
+                table {
+                    border: 0;
+                }
+
+                thead {
+                    display: none;
+                }
+
+                tr {
+                    margin-bottom: 15px;
+                    display: block;
+                    border-bottom: 2px solid #ddd;
+                }
+
+                td {
+                    display: block;
+                    font-size: 13px;
+                    border-bottom: 1px solid #ddd;
+                }
+
+                td::before {
+                    content: attr(data-label);
+                    float: right;
+                    font-weight: bold;
+                    text-transform: uppercase;
+                }
+
+                td:last-child {
+                    border-bottom: 0;
+                }
+            }
+        </style>
     </head>
 
     <body>
-        Here will somethings from webd essentials
+        <h1>
+            WebD Essentials
+
+            <a href="https://webdessentials.hashnode.dev/" target="_blank">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="icon">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+                </svg>
+            </a>
+        </h1>
+        <a href="https://ahmad-raza.vercel.app" target="_blank">Ahmad Raza</a> - owner and caretaker of this org
+
+        <hr>
+
+        <h4>
+            List of all the series
+        </h4>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Series</th>
+                    <th>Blogs at @hashnode</th>
+                    <th>Live</th>
+                    <th>Repository</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+
+        <script>
+
+            const orgURL = "https://github.com/WebD-Essentials";
+
+
+            fetch("./data.json")
+                .then((response) => response.json())
+                .then((data) => {
+                    const table = document.querySelector("table tbody");
+                    data.forEach((item) => {
+                        const row = document.createElement("tr");
+                        row.innerHTML = `
+                                <td data-label="Series">${item.repoName}</td>
+                                <td data-label="Blogs at @hashnode"><a href="${item.hashnode}" target="_blank">Read</a></td>
+                                <td data-label="Live"><a href="/${item.repoName}" target="_blank">Open</a></td>
+                                <td data-label="Repository"><a href="${orgURL}/${item.repoName}" target="_blank">Open</a></td>
+                                <td data-label="" class="desc" >${item.description}</td>
+                            `;
+                        table.appendChild(row);
+                    });
+                });
+        </script>
+
     </body>
 
 </html>
