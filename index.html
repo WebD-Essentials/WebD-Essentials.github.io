@@ -6,76 +6,8 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <link rel="icon" type="image/png" href="./S-LOGO.png" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="./style.css">
         <title>WebD Essentials</title>
-        <style>
-            @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
-
-            .icon {
-                width: 20px;
-            }
-
-            * {
-                font-family: 'Poppins', sans-serif;
-            }
-
-            .desc {
-                font-size: 12px;
-                width: 300px;
-            }
-
-            table {
-                border-collapse: collapse;
-                width: 100%;
-            }
-
-            th,
-            td {
-                text-align: left;
-                padding: 8px;
-            }
-
-            tr:nth-child(even) {
-                background-color: #f2f2f2;
-            }
-
-            th {
-                background-color: #6495ED;
-                color: white;
-            }
-
-            @media screen and (max-width: 600px) {
-                table {
-                    border: 0;
-                }
-
-                thead {
-                    display: none;
-                }
-
-                tr {
-                    margin-bottom: 15px;
-                    display: block;
-                    border-bottom: 2px solid #ddd;
-                }
-
-                td {
-                    display: block;
-                    font-size: 13px;
-                    border-bottom: 1px solid #ddd;
-                }
-
-                td::before {
-                    content: attr(data-label);
-                    float: right;
-                    font-weight: bold;
-                    text-transform: uppercase;
-                }
-
-                td:last-child {
-                    border-bottom: 0;
-                }
-            }
-        </style>
     </head>
 
     <body>
@@ -95,12 +27,28 @@
         <hr>
 
         <h4>
+            A must read blog for beginners
+        </h4>
+        <table>
+            <tbody>
+                <td data-label="Date"> Dec 25, 2022 </td>
+                <td data-label="Title">The way I learned programming 🧑‍💻</td>
+                <td data-label="@HASHNODE"><a href="https://webdessentials.hashnode.dev/the-way-i-learned-programming"
+                        target="_blank">Read at hashnode</a></td>
+                <td data-label="@GH-PAGE"><a
+                        href="https://razaahmad333.github.io/hashnode-blogs/clc3erszm0g9ayfnv5sibdjze"
+                        target="_blank">Read on GitHubPage</a></td>
+                <td data-label="" class="desc">Answers to all the beginner's questions, that I get</td>
+            </tbody>
+        </table>
+
+        <h4>
             List of all the series
         </h4>
-
-        <table>
+        <table class="table">
             <thead>
                 <tr>
+                    <th>Started At</th>
                     <th>Series</th>
                     <th>Blogs at @hashnode</th>
                     <th>Live</th>
@@ -119,11 +67,12 @@
             fetch("./data.json")
                 .then((response) => response.json())
                 .then((data) => {
-                    const table = document.querySelector("table tbody");
+                    const table = document.querySelector(".table tbody");
                     data.forEach((item) => {
                         const row = document.createElement("tr");
                         row.innerHTML = `
-                                <td data-label="Series">${item.repoName}</td>
+                                <td data-label="Started At">${item.startedAt}</td>
+                                <td data-label="Series">${item.repoName + " " + item.titleEmoji}</td>
                                 <td data-label="Blogs at @hashnode"><a href="${item.hashnode}" target="_blank">Read</a></td>
                                 <td data-label="Live"><a href="/${item.repoName}" target="_blank">Open</a></td>
                                 <td data-label="Repository"><a href="${orgURL}/${item.repoName}" target="_blank">Open</a></td>
